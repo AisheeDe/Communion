@@ -1,0 +1,22 @@
+body {
+    background-color: #f8f9fa !important;
+  }
+  
+  .container {
+    max-width: 800px !important;
+    margin: auto !important;
+    padding: 20px !important;
+  }
+  
+  .btn {
+    background-color: blue;
+    color: rgba(255, 255, 255, 0.463);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: darkblue;
+  }
+  
