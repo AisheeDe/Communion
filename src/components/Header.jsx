@@ -23,7 +23,7 @@ const Header = () => {
         {menuOpen ? <FiX size={30} /> : <FiMenu size={30} />}
       </div>
 
-      <div>
+      <div className="nav-container">
       <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
         <ul>
           <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
