@@ -1,6 +1,7 @@
+import React, { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import EventForm from "./EventForm"; 
 import "./EventForm.css";
 
 const Events = () => {
@@ -10,19 +11,11 @@ const Events = () => {
   ]);
 
   const [filter, setFilter] = useState("All");
-  const [newEvent, setNewEvent] = useState({ title: "", date: "", location: "", category: "", description: "" });
 
   const filteredEvents = filter === "All" ? events : events.filter(event => event.category === filter);
 
-  const handleChange = (e) => {
-    setNewEvent({ ...newEvent, [e.target.name]: e.target.value });
-  };
-
-  const addEvent = () => {
-    if (newEvent.title && newEvent.date && newEvent.location && newEvent.category && newEvent.description) {
-      setEvents([...events, { ...newEvent, id: events.length + 1 }]);
-      setNewEvent({ title: "", date: "", location: "", category: "", description: "" });
-    }
+  const addEvent = (newEvent) => {
+    setEvents([...events, { ...newEvent, id: events.length + 1 }]);
   };
 
   return (
@@ -63,32 +56,7 @@ const Events = () => {
         ))}
       </div>
 
-      <motion.div 
-        className="event-form"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <h3>Add New Event</h3>
-        <input type="text" name="title" placeholder="Title" value={newEvent.title} onChange={handleChange} />
-        <input type="date" name="date" value={newEvent.date} onChange={handleChange} />
-        <input type="text" name="location" placeholder="Location" value={newEvent.location} onChange={handleChange} />
-        <select name="category" value={newEvent.category} onChange={handleChange}>
-          <option value="">Select Category</option>
-          <option value="Religious">Religious</option>
-          <option value="Social">Social</option>
-          <option value="Charity">Charity</option>
-        </select>
-        <textarea name="description" placeholder="Description" value={newEvent.description} onChange={handleChange}></textarea>
-        <motion.button 
-          onClick={addEvent}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="submit-btn"
-        >
-          Add Event
-        </motion.button>
-      </motion.div>
+      <EventForm onAddEvent={addEvent} />
     </div>
   );
 };
